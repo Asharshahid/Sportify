@@ -18,7 +18,7 @@ export const userSchema = new mongoose.Schema({
 // ------4    
     player_type : {
         type: String,
-        default: "Enter player type"
+        default: "Right hand batsman"
     },
 // ------5
     country : {

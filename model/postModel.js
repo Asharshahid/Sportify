@@ -12,12 +12,12 @@ export const postSchema = new mongoose.Schema({
         required:[true, "Please Enter user Id"]
     },
     match_format : {
-        type:String
-        // required:[true, "Please Enter Match Type"]
+        type:String,
+        required:[true, "Please Enter Match Type"]
     },
     score_wicket : {
-        type:Number
-        // required:[true, "Please Enter Your Score or Wicket"]
+        type:Number,
+        required:[true, "Please Enter Your Score or Wicket"]
     }
 
 })

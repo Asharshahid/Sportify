@@ -21,6 +21,8 @@ router.get("/logout", controller.logout)
         
              //_______________Other Routes Section______________//
 
+// Get Login User
+router.get("/getuser/:id",middleware ,controller.getUser)
 
 // Get Login User
 router.get("/getloginuser",middleware ,controller.getLoginUser)
@@ -32,13 +34,13 @@ router.put("/updateloginuser",middleware ,controller.updateLoginUser)
 router.get("/followunfollow/:id",middleware ,controller.followUnfollow)
 
 // Create Post
-router.post("/createpost", controller.createPost)
+router.post("/createpost",middleware ,controller.createPost)
 
-// Create P
-// router.post("/createPost")
+// Delete Post
+router.delete("/deletepost/:id",middleware ,controller.deletePost)
 
-// Get Post
-// router.post("")
+// Get All Post Login User
+router.get("/getallpost",middleware ,controller.getAllPost)
 
 // Delete Post
 // router.post("")

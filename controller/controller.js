@@ -84,34 +84,7 @@ export async function updateLoginUser(req, res){
       }
 }
 
-
-
-
-
-           //___________ STUDENTS RESULTS _____________// 
-
-// ### ADD STUDENT RESULT
-
-// export async function addResult(req, res){
-//     try {
-//         const {seat_number,course_number,theory,lab,total_marks}= req.body;
-        
-//         const existingResult = await Result.findOne({ $and: [{ seat_number }, { course_number }] });
-//         if (existingResult) {
-//             return res.status(400).json({ message: 'Result already exists' });
-//         }
-//         const newResult = new Result({ seat_number, course_number, theory, lab, total_marks });
-//         await newResult.save();  
-//         res.status(201).send(newResult);
-        
-        
-//     } 
-//     catch (error) {
-//         console.error('Error creating result:', error);
-//         res.status(500).json({ message: 'Internal Server Error' });
-//       }
-// }
-
+ 
 // ### Follow_UNFOLLOW
 
 export async function followUnfollow(req, res){
@@ -162,7 +135,22 @@ export async function getLoginUser(req, res){
       }
 }
 
+// GET USER
+
+export async function getUser(req, res){
+    try{
+        const userId = req.params.id;
+        const findUser = await User.findById(userId)
+        res.status(201).send(findUser)
+
+    }
+    catch(err){
+        res.status(404).send(err)
+    }
+}
+
 // LOGOUT USER
+
 export async function logout(req,res){
    try{
        const token = res.clearCookie("jwt");
@@ -174,7 +162,6 @@ export async function logout(req,res){
 }
 
 
-
 // Create Post
 
 export async function createPost(req, res){
@@ -184,7 +171,6 @@ export async function createPost(req, res){
         const verify = jwt.verify(token, "ubit123456789");
         const newPost = new Post({user_id:verify._id, match_format, score_wicket})
         await newPost.save();
-        console.log(match_format);
         res.status(201).send(newPost)
 
     }
@@ -194,9 +180,32 @@ export async function createPost(req, res){
 }
 
 
-// Get Post
+// Get All Post Login User
 
+export async function getAllPost(req, res){
+    try{
+        const token = req.header("jwt") || req.cookies.jwt ;
+        const verify = jwt.verify(token, "ubit123456789");
+        const allPost = await Post.find({user_id:verify._id})
+        res.status(201).send(allPost)
 
+    }
+    catch(err){
+        res.status(404).send(err)
+    }
+}
 
 
 // Delete Post
+
+export async function deletePost(req, res){
+    try{
+        const postId = req.params.id;
+        const deletePost = await Post.findByIdAndDelete(postId)
+        res.status(201).send(deletePost)
+
+    }
+    catch(err){
+        res.status(404).send(err)
+    }
+}
