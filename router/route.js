@@ -21,7 +21,7 @@ router.get("/logout", controller.logout)
         
              //_______________Other Routes Section______________//
 
-// Get Login User
+// Get User
 router.get("/getuser/:id",middleware ,controller.getUser)
 
 // Get Login User
