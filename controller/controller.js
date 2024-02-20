@@ -149,6 +149,21 @@ export async function getUser(req, res){
     }
 }
 
+// GET ALL USER
+
+export async function getAllUser(req, res){
+    try{
+        const token = req.header("jwt") || req.cookies.jwt ;
+        const verify = jwt.verify(token, "ubit123456789");
+        const findAllUser = await User.find({ _id: { $ne: verify._id } });
+        res.status(201).send(findAllUser)
+
+    }
+    catch(err){
+        res.status(404).send(err)
+    }
+}
+
 // LOGOUT USER
 
 export async function logout(req,res){

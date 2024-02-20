@@ -24,6 +24,9 @@ router.get("/logout", controller.logout)
 // Get Login User
 router.get("/getuser/:id",middleware ,controller.getUser)
 
+// Get All User
+router.get("/getalluser",middleware ,controller.getAllUser)
+
 // Get Login User
 router.get("/getloginuser",middleware ,controller.getLoginUser)
 
@@ -42,8 +45,6 @@ router.delete("/deletepost/:id",middleware ,controller.deletePost)
 // Get All Post Login User
 router.get("/getallpost",middleware ,controller.getAllPost)
 
-// Delete Post
-// router.post("")
 
 
 
