@@ -18,6 +18,14 @@ export const postSchema = new mongoose.Schema({
     score_wicket : {
         type:Number,
         required:[true, "Please Enter Your Score or Wicket"]
+    },
+    threeWicket_fiftyRun : {
+        type:Number,
+        required:[true, "Please Enter Your Score or Wicket"]
+    },
+    fiveWicket_hundredRun : {
+        type:Number,
+        required:[true, "Please Enter Your Score or Wicket"]
     }
 
 })

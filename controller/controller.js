@@ -181,10 +181,37 @@ export async function logout(req,res){
 
 export async function createPost(req, res){
     try{
+        let w3_R50=0;
+        let w5_R100=0;
         const {match_format,score_wicket}= req.body;
         const token = req.header("jwt") || req.cookies.jwt ;
         const verify = jwt.verify(token, "ubit123456789");
-        const newPost = new Post({user_id:verify._id, match_format, score_wicket})
+        const getLoginUser = await User.findById({_id:verify._id})
+        if(getLoginUser.player_type=="Batsman"){
+            if(score_wicket >= 100){
+                w5_R100=1
+            }
+            else if(score_wicket >= 50){
+                w3_R50=1
+            }
+            else{
+                w5_R100=0
+                w3_R50=0
+            }
+        }
+        else{
+            if(score_wicket >= 5){
+                w5_R100=1
+            }
+            else if(score_wicket >= 3){
+                w3_R50=1
+            }
+            else{
+                w5_R100=0
+                w3_R50=0
+            }
+        }
+        const newPost = new Post({user_id:verify._id, match_format, score_wicket,threeWicket_fiftyRun:w3_R50,fiveWicket_hundredRun:w5_R100})
         await newPost.save();
         res.status(201).send(newPost)
 
