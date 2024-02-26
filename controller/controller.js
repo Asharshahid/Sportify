@@ -21,12 +21,12 @@ export async function TestPage(req, res){
 
 export async function register(req, res){
     try {
-        const {name,email,password}= req.body;
+        const {name,email,password,player_type,country,city,area,wathsapp,status}= req.body;
         const existingUser = await User.findOne({email});
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
         }
-        const newUser = new User({name, email, password });
+        const newUser = new User({name,email,password,player_type,country,city,area,wathsapp,status});
         await newUser.save();  
         res.send(newUser);
         
@@ -237,6 +237,19 @@ export async function getAllPost(req, res){
     }
 }
 
+// Get All Post BY User Id
+
+export async function getAllPostUserId(req, res){
+    try{
+        const userId = req.params.id;
+        const allPost = await Post.find({user_id:userId})
+        res.status(201).send(allPost)
+
+    }
+    catch(err){
+        res.status(404).send(err)
+    }
+}
 
 // Delete Post
 

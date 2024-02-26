@@ -1,0 +1,3 @@
+PFBW5HHmyHquaC9g
+
+mongodb+srv://asharshahid766:PFBW5HHmyHquaC9g@cluster0.roe15k3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

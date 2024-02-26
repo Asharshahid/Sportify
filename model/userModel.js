@@ -18,7 +18,7 @@ export const userSchema = new mongoose.Schema({
 // ------4    
     player_type : {
         type: String,
-        default: "Batsman"
+        required : [true, "Please provide a player type"]
     },
 // ------5
     country : {

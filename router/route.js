@@ -45,6 +45,9 @@ router.delete("/deletepost/:id",middleware ,controller.deletePost)
 // Get All Post Login User
 router.get("/getallpost",middleware ,controller.getAllPost)
 
+// Get All Post By User Id
+router.get("/getallpostbyid/:id",middleware ,controller.getAllPostUserId)
+
 
 
 

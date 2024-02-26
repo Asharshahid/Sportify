@@ -28,6 +28,7 @@ export const postSchema = new mongoose.Schema({
         required:[true, "Please Enter Your Score or Wicket"]
     }
 
-})
+},{timestamps:true}
+)
 
 export default mongoose.model.Posts || mongoose.model("Post", postSchema);
