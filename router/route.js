@@ -6,6 +6,8 @@ import middleware from "../middleware/middleware.js";
 
 
 router.get("/testpage", controller.TestPage)
+router.get("/", controller.check)
+
 
         //_______________Authentication______________//
 

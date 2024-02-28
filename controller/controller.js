@@ -13,6 +13,14 @@ export async function TestPage(req, res){
         res.status(501).send(error)
     }
 }
+export async function check(req, res){
+    try{
+        res.json("Welcome to Sportify Backend After cors added")
+    }
+    catch(error){
+        res.status(501).send(error)
+    }
+}
              
                     //___________ AUTHENTICATION _____________// 
 
