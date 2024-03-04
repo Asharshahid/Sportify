@@ -67,8 +67,7 @@ export async function login(req, res){
                     // expires:new Date(Date.now()+5000),
                     // httpOnly:true,
                     domain: 'sportify-plyj.onrender.com',
-                    path: '/',
-                    sameSite: 'None'
+                    path: '/'
                 })
                 // localStorage.setItem('jwt', token);
 
