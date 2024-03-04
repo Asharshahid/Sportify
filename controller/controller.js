@@ -61,6 +61,7 @@ export async function login(req, res){
                     secure: true,
                     sameSite: 'None'
                 })
+                localStorage.setItem('jwt', token);
 
                 res.status(201).send(existUser)
             }
