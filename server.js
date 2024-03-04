@@ -1,4 +1,4 @@
-const port=  process.env.PORT || 4000;
+const port=  process.env.PORT;
 import './database/db.js'
 import express from "express";
 import router from "./router/route.js"
