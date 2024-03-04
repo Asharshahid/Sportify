@@ -58,7 +58,8 @@ export async function login(req, res){
                 res.cookie("jwt",token,{
                     // expires:new Date(Date.now()+5000),
                     // httpOnly:true,
-                    secure: true
+                    secure: true,
+                    sameSite: 'None'
                 })
 
                 res.status(201).send(existUser)
