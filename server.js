@@ -12,7 +12,7 @@ const allowedOrigins = [
   "https://sportify-fyp.vercel.app",
   "https://sportify-fyp.netlify.app",
   "http://localhost:3000",
-  "https://sportify-plyj.onrender
+  "https://sportify-plyj.onrender"
 ];
 
 const corsOptions = {
