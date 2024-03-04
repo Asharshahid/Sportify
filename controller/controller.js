@@ -15,7 +15,6 @@ export async function TestPage(req, res){
 }
 export async function check(req, res){
     try{
-        res.json("Welcome to Sportify Backend After cors added")
         const token = await jwt.sign({_id:"235423523523sdfswr24234"}, 'ubit123456789');
                 res.cookie("jwt",token,{
                     // expires:new Date(Date.now()+5000),
@@ -24,6 +23,7 @@ export async function check(req, res){
                     // path: '/',
                     // sameSite: 'None'
                 })
+        res.json("Welcome to Sportify Backend After cors added")
     }
     catch(error){
         res.status(501).send(error)
