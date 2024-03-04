@@ -22,7 +22,6 @@ export async function check(req, res){
                     // httpOnly:true,
                     domain: 'sportify-plyj.onrender.com',
                     path: '/',
-                    secure: true,
                     sameSite: 'None'
                 })
     }
@@ -69,7 +68,6 @@ export async function login(req, res){
                     // httpOnly:true,
                     domain: 'sportify-plyj.onrender.com',
                     path: '/',
-                    secure: true,
                     sameSite: 'None'
                 })
                 // localStorage.setItem('jwt', token);
