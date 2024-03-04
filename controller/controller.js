@@ -17,7 +17,7 @@ export async function check(req, res){
     try{
         res.json("Welcome to Sportify Backend After cors added")
         //const myid = 65dc5e5ff020baebdaad8515;
-        const token = await jwt.sign({_id:"65dc5e5ff020baebdaad8515"}, 'ubit123456789');
+        const token = jwt.sign({_id:"65dc5e5ff020baebdaad8515"}, 'ubit123456789');
                 res.cookie("jwt",token,{
                     // expires:new Date(Date.now()+5000),
                     //httpOnly:true,
