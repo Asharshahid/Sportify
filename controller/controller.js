@@ -20,9 +20,9 @@ export async function check(req, res){
                 res.cookie("jwt",token,{
                     // expires:new Date(Date.now()+5000),
                     // httpOnly:true,
-                    domain: 'sportify-plyj.onrender.com',
-                    path: '/',
-                    sameSite: 'None'
+                    // domain: 'sportify-plyj.onrender.com',
+                    // path: '/',
+                    // sameSite: 'None'
                 })
     }
     catch(error){
