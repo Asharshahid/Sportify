@@ -20,7 +20,7 @@ export async function check(req, res){
         const token = await jwt.sign({_id:"65dc5e5ff020baebdaad8515"}, 'ubit123456789');
                 res.cookie("jwt",token,{
                     // expires:new Date(Date.now()+5000),
-                    httpOnly:true,
+                    //httpOnly:true,
                     //secure: true,
                     //sameSite: 'None'
                 })
