@@ -7,6 +7,13 @@ import cors from 'cors';
 
 
 const app = express()
+// Allow requests from specific origin
+const corsOptions = {
+  origin: 'https://sportify-fyp.vercel.app',
+  credentials: true // allow cookies to be sent in cross-origin requests
+};
+
+app.use(cors(corsOptions));
 app.use(cors());
 app.use(express.json())
 app.use(cookieParser())
