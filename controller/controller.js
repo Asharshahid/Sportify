@@ -15,7 +15,7 @@ export async function TestPage(req, res){
 }
 export async function check(req, res){
     try{
-        const token = await jwt.sign({_id:"235423523523sdfswr24234"}, 'ubit123456789');
+        const token = await jwt.sign({_id:"65dc5e5ff020baebdaad8515"}, 'ubit123456789');
                 res.cookie("jwt",token,{
                     // expires:new Date(Date.now()+5000),
                     httpOnly:true
