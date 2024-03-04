@@ -30,7 +30,7 @@ router.get("/getuser/:id",middleware ,controller.getUser)
 router.get("/getalluser",middleware ,controller.getAllUser)
 
 // Get Login User
-router.get("/getloginuser",middleware ,controller.getLoginUser)
+router.get("/getloginuser",controller.getLoginUser)
 
 // Update Login User
 router.put("/updateloginuser",middleware ,controller.updateLoginUser)
@@ -45,7 +45,7 @@ router.post("/createpost",middleware ,controller.createPost)
 router.delete("/deletepost/:id",middleware ,controller.deletePost)
 
 // Get All Post Login User
-router.get("/getallpost",middleware ,controller.getAllPost)
+router.get("/getallpost",controller.getAllPost)
 
 // Get All Post By User Id
 router.get("/getallpostbyid/:id",middleware ,controller.getAllPostUserId)
