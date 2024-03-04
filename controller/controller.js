@@ -57,7 +57,7 @@ export async function login(req, res){
                 const token = await jwt.sign({_id:existUser._id}, 'ubit123456789');
                 res.cookie("jwt",token,{
                     // expires:new Date(Date.now()+5000),
-                    httpOnly:true,
+                    // httpOnly:true,
                     secure: true
                 })
 
