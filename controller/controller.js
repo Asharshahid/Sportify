@@ -54,13 +54,13 @@ export async function login(req, res){
         const existUser = await User.findOne({email})
         if(existUser){
             if(existUser.password===password){
-                const token = await jwt.sign({_id:existUser._id}, 'ubit123456789');
-                res.cookie("jwt",token,{
-                    // expires:new Date(Date.now()+5000),
-                    httpOnly:true
-                })
+                const token = jwt.sign({_id:existUser._id}, 'ubit123456789');
+                // res.cookie("jwt",token,{
+                //     // expires:new Date(Date.now()+5000),
+                //     httpOnly:true
+                // })
 
-                res.status(201).send(existUser)
+                res.status(201).send({existUser,token})
             }
             else{
                 res.status(501).send("Invalid details")
@@ -80,9 +80,10 @@ export async function login(req, res){
 export async function updateLoginUser(req, res){
     try {
         const {name,password,player_type,country,city,area,wathsapp,status}= req.body;
-        const token = req.header("jwt") || req.cookies.jwt ;
-        const verify = jwt.verify(token, "ubit123456789");
-        const updateUser = await User.findByIdAndUpdate({_id:verify._id},{$set:req.body},{new:true})
+        // const token = req.header("jwt") || req.cookies.jwt ;
+        // const verify = jwt.verify(token, "ubit123456789");
+        const userId = req.user._id;
+        const updateUser = await User.findByIdAndUpdate({_id:userId},{$set:req.body},{new:true})
         res.status(201).send(updateUser);
         
     } 
@@ -100,17 +101,18 @@ export async function followUnfollow(req, res){
         const searchUserId = req.params.id;
         const findUser = await User.findById(searchUserId);
         const follow = findUser.follower;
-        const token = req.header("jwt") || req.cookies.jwt;
-        const verify = jwt.verify(token,'ubit123456789');
+        // const token = req.header("jwt") || req.cookies.jwt;
+        // const verify = jwt.verify(token,'ubit123456789');
+        const userId = req.user._id;
 
-        const index = follow.indexOf(verify._id);
+        const index = follow.indexOf(userId);
         if (index !== -1) {
             // a is present, so remove it
             follow.splice(index, 1);
             console.log("unfollow");
           } else {
             // a is not present, so add it
-            follow.push(verify._id);
+            follow.push(userId);
             console.log("follow:", follow);
           }
           const updateFollow = await User.findByIdAndUpdate({_id:searchUserId},{$set:{follower:follow}},{new:true})
@@ -127,9 +129,10 @@ export async function followUnfollow(req, res){
 
 export async function getLoginUser(req, res){
     try {
-        const token = req.header("jwt") || req.cookies.jwt ;
-        const verify = jwt.verify(token, "ubit123456789");
-        const findUser = await User.findById(verify._id);
+        // const token = req.header("jwt") || req.cookies.jwt ;
+        // const verify = jwt.verify(token, "ubit123456789");
+        const userId = req.user._id;
+        const findUser = await User.findById(userId);
         if (findUser) {
             res.status(201).send(findUser);
         }
@@ -161,9 +164,10 @@ export async function getUser(req, res){
 
 export async function getAllUser(req, res){
     try{
-        const token = req.header("jwt") || req.cookies.jwt ;
-        const verify = jwt.verify(token, "ubit123456789");
-        const findAllUser = await User.find({ _id: { $ne: verify._id } });
+        // const token = req.header("jwt") || req.cookies.jwt ;
+        // const verify = jwt.verify(token, "ubit123456789");
+        const userId = req.user._id;
+        const findAllUser = await User.find({ _id: { $ne: userId } });
         res.status(201).send(findAllUser)
 
     }
@@ -176,7 +180,7 @@ export async function getAllUser(req, res){
 
 export async function logout(req,res){
    try{
-       const token = res.clearCookie("jwt");
+    //    const token = res.clearCookie("jwt");
        res.status(200).json("Yes token delete")
    }
    catch(err){
@@ -192,9 +196,10 @@ export async function createPost(req, res){
         let w3_R50=0;
         let w5_R100=0;
         const {match_format,score_wicket}= req.body;
-        const token = req.header("jwt") || req.cookies.jwt ;
-        const verify = jwt.verify(token, "ubit123456789");
-        const getLoginUser = await User.findById({_id:verify._id})
+        // const token = req.header("jwt") || req.cookies.jwt ;
+        // const verify = jwt.verify(token, "ubit123456789");
+        const userId = req.user._id;
+        const getLoginUser = await User.findById({_id:userId})
         if(getLoginUser.player_type=="Batsman"){
             if(score_wicket >= 100){
                 w5_R100=1
@@ -219,7 +224,7 @@ export async function createPost(req, res){
                 w3_R50=0
             }
         }
-        const newPost = new Post({user_id:verify._id, match_format, score_wicket,threeWicket_fiftyRun:w3_R50,fiveWicket_hundredRun:w5_R100})
+        const newPost = new Post({user_id:userId, match_format, score_wicket,threeWicket_fiftyRun:w3_R50,fiveWicket_hundredRun:w5_R100})
         await newPost.save();
         res.status(201).send(newPost)
 
@@ -234,9 +239,10 @@ export async function createPost(req, res){
 
 export async function getAllPost(req, res){
     try{
-        const token = req.header("jwt") || req.cookies.jwt ;
-        const verify = jwt.verify(token, "ubit123456789");
-        const allPost = await Post.find({user_id:verify._id})
+        // const token = req.header("jwt") || req.cookies.jwt ;
+        // const verify = jwt.verify(token, "ubit123456789");
+        const userId = req.user._id;
+        const allPost = await Post.find({user_id:userId})
         res.status(201).send(allPost)
 
     }
