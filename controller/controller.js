@@ -62,22 +62,11 @@ export async function login(req, res){
         const existUser = await User.findOne({email})
         if(existUser){
             if(existUser.password===password){
-<<<<<<< HEAD
                 const token = jwt.sign({_id:existUser._id}, 'ubit123456789');
                 // res.cookie("jwt",token,{
                 //     // expires:new Date(Date.now()+5000),
                 //     httpOnly:true
                 // })
-=======
-                const token = await jwt.sign({_id:existUser._id}, 'ubit123456789');
-                res.cookie("jwt",token,{
-                    // expires:new Date(Date.now()+5000),
-                    // httpOnly:true,
-                    domain: 'sportify-plyj.onrender.com',
-                    path: '/'
-                })
-                // localStorage.setItem('jwt', token);
->>>>>>> 1857e68724f9d5f082370e82443cbaa21704ffeb
 
                 res.status(201).send({existUser,token})
             }
